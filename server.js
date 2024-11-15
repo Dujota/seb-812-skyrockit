@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config();
 const express = require('express');
@@ -27,6 +28,7 @@ mongoose.connection.on('connected', () => {
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -44,7 +46,7 @@ app.get('/', (req, res) => {
     res.redirect(`/users/${req.session.user._id}/applications`);
   } else {
     // Show the homepage for users who are not signed in
-    res.render('index.ejs');
+    res.render('index.ejs', { pageTitle: 'Skyrockit' });
   }
 });
 
