@@ -14,7 +14,7 @@
 
   <ul>
     <% applications.forEach((app)=>{ %>
-      <a href="">
+      <a href="/users/<%= user._id %>/applications/<%= app._id %>">
         <li><%= app.title %> at <%= app.company %></li>
       </a>
     <% }) %>
